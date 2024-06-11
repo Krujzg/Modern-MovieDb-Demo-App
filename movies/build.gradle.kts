@@ -72,6 +72,10 @@ android {
         }
     }
     testOptions.unitTests.isIncludeAndroidResources = true
+
+    detekt {
+        config = files("../detekt.yml")
+    }
 }
 
 dependencies {

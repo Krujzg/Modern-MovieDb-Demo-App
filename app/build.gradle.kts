@@ -24,6 +24,9 @@ android {
         }
     }
 
+    detekt {
+        config = files("../detekt.yml")
+    }
 
     buildTypes {
         release {

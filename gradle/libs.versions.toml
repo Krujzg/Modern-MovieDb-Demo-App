@@ -41,7 +41,7 @@ logger = "2.2.0"
 leakCanary = "2.12"
 coil_compose = "2.6.0"
 ktlint = "10.2.1"
-detekt = "1.19.0"
+detekt = "1.23.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -99,6 +99,7 @@ leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.re
 composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
 composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil_compose" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -108,3 +109,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 hiltAgp = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint"}
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
+
+[bundles]
+detektplugins = ["detekt-formatting"]
