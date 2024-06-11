@@ -40,11 +40,13 @@ android {
     val baseUrl = localProperties.getProperty("base_url")
     val apiKey = localProperties.getProperty("api_key")
 
-    buildTypes {
-        forEach { buildType ->
-            named(buildType.name) {
-                buildConfigField("String", "BASE_URL", baseUrl)
-                buildConfigField("String", "API_KEY", apiKey)
+    if (baseUrl != null && apiKey != null) {
+        buildTypes {
+            forEach { buildType ->
+                named(buildType.name) {
+                    buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+                    buildConfigField("String", "API_KEY", "\"$apiKey\"")
+                }
             }
         }
     }
