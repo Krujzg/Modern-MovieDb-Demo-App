@@ -31,3 +31,5 @@
 
 # Keep the SharedModule_ProvideTimberLoggerFactory class and its members
 -keep class com.example.core.presentation.SharedModule_ProvideTimberLoggerFactory { *; }
+
+-keep class com.example.core.presentation.states.AbstractUIState { *; }

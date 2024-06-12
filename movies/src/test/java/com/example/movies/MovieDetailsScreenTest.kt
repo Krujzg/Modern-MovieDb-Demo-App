@@ -54,7 +54,7 @@ class MovieDetailsScreenTest : BaseComposeTest() {
     @Test
     fun `MovieDetailsPage details should be shown when uiState is null`() {
         withCompositionLocals {
-            MovieDetailsPage(uiState = MovieDetailsUiState(null))
+            MovieDetailsPage(uiState = MovieDetailsUiState())
         }
         rule.apply {
             runOnIdle {
@@ -70,12 +70,12 @@ class MovieDetailsScreenTest : BaseComposeTest() {
 
     @Test
     fun `LoadingProgressBar should show when loadingState is true`() = runTest {
-        val uiState = MovieDetailsUiState(null)
+        val nullUiState = MovieDetailsUiState()
         withCompositionLocals {
-            MovieDetailsPage(uiState = uiState)
+            MovieDetailsPage(uiState = nullUiState)
         }
 
-        uiState.showLoadingDialog()
+        nullUiState.showLoadingDialog()
 
         rule.apply {
             runOnIdle {
@@ -86,12 +86,12 @@ class MovieDetailsScreenTest : BaseComposeTest() {
 
     @Test
     fun `LoadingProgressBar should not show when loadingState is false`() = runTest {
-        val uiState = MovieDetailsUiState(null)
+        val nullUiState = MovieDetailsUiState()
         withCompositionLocals {
-            MovieDetailsPage(uiState = uiState)
+            MovieDetailsPage(uiState = nullUiState)
         }
 
-        uiState.hideLoadingDialog()
+        nullUiState.hideLoadingDialog()
 
         rule.apply {
             runOnIdle {

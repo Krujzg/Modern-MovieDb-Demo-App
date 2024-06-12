@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.example.movies.presentation.states.MovieDetailsUiState { *; }
+
+-keep class com.example.movies.presentation.states.MoviesUiState { *; }
+
+-keep class com.example.movies.domain.movieentity.MovieDetails { *; }
