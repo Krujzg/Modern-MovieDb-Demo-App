@@ -9,7 +9,7 @@ import com.example.movies.domain.MovieResponse
 import javax.inject.Inject
 
 internal class MoviesQueryHandler @Inject constructor(private val repository: IMovieRepository) :
-    AbstractQueryHandler<MoviesQuery, MovieResponse, Result<MovieResponse, RootError>>() {
+    AbstractQueryHandler<MoviesQuery, MovieResponse, Result<MovieResponse, RootError>>(){
     override suspend fun handleQuery(request: MoviesQuery): Result<MovieResponse, RootError> {
         val response = repository.getMovies(request.page)
         return getResultOnResponse(response)

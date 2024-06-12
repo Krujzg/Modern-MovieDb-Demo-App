@@ -2,6 +2,7 @@ package com.example.core.application.common
 
 import com.example.core.application.common.interfaces.Command
 import com.example.core.domain.DataError
+import com.example.core.domain.constants.NetworkResponseCode
 import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +19,7 @@ abstract class AbstractCommandHandler<
         TResponseValue : Any,
         TCommandResult : Result<TResponseValue, RootError>> : BaseHandler<TResponseValue>() {
 
-    private var result: TCommandResult? = defaultResult()
+    private var result: Result<TResponseValue, RootError>? = defaultResult as? TCommandResult
 
     suspend fun handle(request: TCommand): Flow<TCommandResult> {
         return flow {
@@ -28,39 +29,25 @@ abstract class AbstractCommandHandler<
                 emit(result)
             } catch (e: UnknownHostException) {
                 Timber.d("CommandHandler: $e!")
-                emit(defaultResult())
+                emit(defaultResult)
             } catch (e: IOException) {
                 Timber.d("CommandHandler: $e!")
-                result = createErrorResult(DataError.Network.NO_INTERNET)
+                result = Result.Error(DataError.Network.NO_INTERNET)
                 emit(result)
             } catch (e: HttpException) {
                 Timber.d("CommandHandler: $e!")
-
-                if (e.response()?.code() == 401) {
-                    result = createErrorResult(DataError.Network.UNAUTHORIZED)
+                if (e.response()?.code() == NetworkResponseCode.UN_AUTHORIZED) {
+                    result = Result.Error(DataError.Network.UNAUTHORIZED)
                     emit(result)
                 } else {
-                    emit(defaultResult())
+                    emit(defaultResult)
                 }
-            } catch (e: Exception) {
+            } catch (e: CancellationException) {
                 Timber.d("CommandHandler: $e!")
-                emit(defaultResult())
-
-                if (e is CancellationException) {
-                    throw e
-                }
+                emit(defaultResult)
+                throw e
             }
         } as Flow<TCommandResult>
-    }
-
-
-    private fun defaultResult(): TCommandResult {
-        return (defaultResult as? TCommandResult) ?: throw IllegalStateException("Invalid default result type")
-    }
-
-    private fun createErrorResult(error: RootError): TCommandResult {
-        return (Result.Error<TResponseValue, RootError>(error) as? TCommandResult)
-            ?: throw IllegalStateException("Invalid error result type")
     }
 
     protected abstract suspend fun handleRequest(request: TCommand): TCommandResult

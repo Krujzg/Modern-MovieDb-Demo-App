@@ -2,6 +2,7 @@ package com.example.core.application.common
 
 import com.example.core.application.common.interfaces.Query
 import com.example.core.domain.DataError
+import com.example.core.domain.constants.NetworkResponseCode
 import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +19,7 @@ abstract class AbstractQueryHandler<
         TResultValue : Any,
         TQueryResult : Result<TResultValue, RootError>> : BaseHandler<TResultValue>() {
 
-    private var result: TQueryResult? = defaultResult as? TQueryResult
+    private var result: Result<TResultValue, RootError>? = defaultResult as? TQueryResult
 
     suspend fun handle(request: TQuery): Flow<TQueryResult> {
         return flow {
@@ -28,38 +29,26 @@ abstract class AbstractQueryHandler<
                 emit(result)
             } catch (e: UnknownHostException) {
                 Timber.d("QueryHandler: $e!")
-                result = createErrorResult(DataError.Network.NO_INTERNET)
+                result = Result.Error(DataError.Network.NO_INTERNET)
                 emit(result)
             } catch (e: IOException) {
                 Timber.d("QueryHandler: $e!")
-                result = createErrorResult(DataError.Network.NO_INTERNET)
+                result = Result.Error(DataError.Network.NO_INTERNET)
                 emit(result)
             } catch (e: HttpException) {
                 Timber.d("QueryHandler: $e!")
-                if (e.response()?.code() == 401) {
-                    result = createErrorResult(DataError.Network.UNAUTHORIZED)
+                if (e.response()?.code() == NetworkResponseCode.UN_AUTHORIZED) {
+                    result = Result.Error(DataError.Network.UNAUTHORIZED)
                     emit(result)
                 } else {
-                    emit(defaultResult())
+                    emit(defaultResult)
                 }
-            } catch (e: Exception) {
+            } catch (e: CancellationException) {
                 Timber.d("QueryHandler: $e!")
-                emit(defaultResult())
-
-                if (e is CancellationException) {
-                    throw e
-                }
+                emit(defaultResult)
+                throw e
             }
         } as Flow<TQueryResult>
-    }
-
-    private fun defaultResult(): TQueryResult {
-        return (defaultResult as? TQueryResult) ?: throw IllegalStateException("Invalid default result type")
-    }
-
-    private fun createErrorResult(error: RootError): TQueryResult {
-        return (Result.Error<TResultValue, RootError>(error) as? TQueryResult)
-            ?: throw IllegalStateException("Invalid error result type")
     }
 
     protected abstract suspend fun handleQuery(request: TQuery): TQueryResult

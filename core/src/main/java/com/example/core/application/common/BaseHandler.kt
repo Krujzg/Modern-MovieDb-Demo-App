@@ -1,6 +1,7 @@
 package com.example.core.application.common
 
 import com.example.core.domain.DataError
+import com.example.core.domain.constants.NetworkResponseCode
 import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import retrofit2.Response
@@ -13,7 +14,7 @@ open class BaseHandler<TResponseValue : Any> {
         return if (checkIfResponseWasSuccessful(response)) {
             val responseBody = response.body()!!
             Result.Success(responseBody)
-        } else if (response.code() == 401) {
+        } else if (response.code() == NetworkResponseCode.UN_AUTHORIZED) {
             Result.Error(DataError.Network.UNAUTHORIZED)
         } else {
             Result.Error(DataError.Network.UNKNOWN)

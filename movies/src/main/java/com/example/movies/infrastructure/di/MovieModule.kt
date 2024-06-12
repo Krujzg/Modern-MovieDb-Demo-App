@@ -1,7 +1,7 @@
 package com.example.movies.infrastructure.di
 
 import com.example.core.application.common.AbstractQueryHandler
-import com.example.core.domain.Constants.TIME_OUT
+import com.example.core.domain.constants.Constants.TIME_OUT
 import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import com.example.core.infrastructure.annotations.AppScope
