@@ -30,5 +30,4 @@ internal class TimberDebugLogger @Inject constructor(
             }
         })
     }
-
 }
