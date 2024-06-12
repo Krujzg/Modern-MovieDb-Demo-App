@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -83,6 +84,7 @@ dependencies {
     implementation(project(":movies"))
     implementation(project(":core"))
     implementation("com.squareup:javapoet:1.13.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
 }
 
 ktlint {
