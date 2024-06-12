@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.detekt) apply true
     alias(libs.plugins.ktlint) apply true
     id("com.google.gms.google-services") version "4.4.2" apply false
+    alias(libs.plugins.google.firebase.appdistribution) apply false
 }

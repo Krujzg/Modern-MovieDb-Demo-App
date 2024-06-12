@@ -42,6 +42,8 @@ leakCanary = "2.12"
 coil_compose = "2.6.0"
 ktlint = "10.2.1"
 detekt = "1.23.1"
+googleFirebaseAppdistribution = "5.0.0"
+googleGmsGoogleServices = "4.4.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -109,6 +111,8 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 hiltAgp = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint"}
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
+google-firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "googleFirebaseAppdistribution" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 
 [bundles]
 detektplugins = ["detekt-formatting"]

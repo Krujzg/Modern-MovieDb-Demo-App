@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ktlint)
     kotlin("kapt")
     id("com.google.gms.google-services")
+    alias(libs.plugins.google.firebase.appdistribution)
 }
 
 android {
@@ -30,6 +31,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                groups="QA"
+            }
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -37,8 +43,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution {
+                groups="QA"
+            }
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
