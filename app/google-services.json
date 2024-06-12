@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593797310547",
+    "project_id": "modernmoviedbdemo",
+    "storage_bucket": "modernmoviedbdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593797310547:android:d4732b1ed53fd03b1efea6",
+        "android_client_info": {
+          "package_name": "com.example.demomoviedbapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBStCuRYP4gcwNjC9h6rmG_WK41V-y_bR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
