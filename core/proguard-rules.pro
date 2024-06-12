@@ -19,3 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# Keep the AppScope annotation
+-keep @interface com.example.core.infrastructure.annotations.AppScope
+
+# Keep the IDebugLogger interface and its implementations
+-keep interface com.example.core.logging.IDebugLogger
+-keep class com.example.core.logging.IDebugLogger { *; }
+
+# Keep the SharedModule_ProvideFormatStrategyFactory class and its members
+-keep class com.example.core.presentation.SharedModule_ProvideFormatStrategyFactory { *; }
+
+# Keep the SharedModule_ProvideTimberLoggerFactory class and its members
+-keep class com.example.core.presentation.SharedModule_ProvideTimberLoggerFactory { *; }
