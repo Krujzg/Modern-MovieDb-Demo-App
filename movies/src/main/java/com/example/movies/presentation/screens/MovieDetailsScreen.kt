@@ -37,6 +37,7 @@ import com.example.core.presentation.theme.AppTheme
 import com.example.core.presentation.theme.Dimensions
 import com.example.core.presentation.theme.LocalAppDimens
 import com.example.movies.R
+import com.example.movies.domain.Constants
 import com.example.movies.presentation.TestTags
 import com.example.movies.presentation.states.MovieDetailsUiState
 
@@ -88,7 +89,7 @@ private fun PosterImage(
     AsyncImage(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.7f)
+            .fillMaxHeight(Constants.SEVENTY_PERCENT_HEIGHT)
             .testTag(TestTags.MOVIE_DETAILS_POSTER_IMAGE),
         model = ImageRequest.Builder(context)
             .data(path)

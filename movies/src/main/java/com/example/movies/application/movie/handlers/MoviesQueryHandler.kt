@@ -5,7 +5,7 @@ import com.example.core.application.common.interfaces.Query
 import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import com.example.movies.application.movie.repositories.IMovieRepository
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieResponse
 import javax.inject.Inject
 
 internal class MoviesQueryHandler @Inject constructor(private val repository: IMovieRepository) :

@@ -7,7 +7,7 @@ import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import com.example.core.presentation.viewmodels.AbstractViewModel
 import com.example.movies.application.movie.handlers.MoviesQuery
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieResponse
 import com.example.movies.presentation.states.MoviesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -10,8 +10,8 @@ import com.example.movies.application.movie.handlers.MoviesQuery
 import com.example.movies.application.movie.handlers.MoviesQueryHandler
 import com.example.movies.application.movie.repositories.IMovieRepository
 import com.example.movies.application.movie.repositories.MovieRepository
-import com.example.movies.domain.MovieDetails
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieDetails
+import com.example.movies.domain.movieentity.MovieResponse
 import com.example.movies.fakes.FakeApiKeyInterceptor
 import com.example.movies.fakes.FakeMovieApi
 import com.example.movies.infrastructure.MovieApi

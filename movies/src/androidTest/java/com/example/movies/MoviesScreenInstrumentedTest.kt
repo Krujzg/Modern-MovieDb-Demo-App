@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.runner.AndroidJUnitRunner
-import com.example.movies.domain.Movie
+import com.example.movies.domain.movieentity.Movie
 import com.example.movies.infrastructure.di.MovieModule
 import com.example.movies.presentation.screens.MoviesScreen
 import com.example.movies.presentation.states.MoviesUiState

@@ -44,8 +44,8 @@ android {
         buildTypes {
             forEach { buildType ->
                 named(buildType.name) {
-                    buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
-                    buildConfigField("String", "API_KEY", "\"$apiKey\"")
+                    buildConfigField("String", "BASE_URL", baseUrl)
+                    buildConfigField("String", "API_KEY", apiKey)
                 }
             }
         }

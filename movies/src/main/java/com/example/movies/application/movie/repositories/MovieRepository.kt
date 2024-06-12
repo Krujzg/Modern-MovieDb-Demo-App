@@ -1,7 +1,7 @@
 package com.example.movies.application.movie.repositories
 
-import com.example.movies.domain.MovieDetails
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieDetails
+import com.example.movies.domain.movieentity.MovieResponse
 import com.example.movies.infrastructure.MovieApi
 import retrofit2.Response
 import javax.inject.Inject

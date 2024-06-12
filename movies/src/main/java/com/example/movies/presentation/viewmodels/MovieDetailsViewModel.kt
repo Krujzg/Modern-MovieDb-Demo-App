@@ -7,7 +7,7 @@ import com.example.core.domain.Result
 import com.example.core.domain.RootError
 import com.example.core.presentation.viewmodels.AbstractViewModel
 import com.example.movies.application.movie.handlers.MovieQuery
-import com.example.movies.domain.MovieDetails
+import com.example.movies.domain.movieentity.MovieDetails
 import com.example.movies.presentation.event.UiEvent
 import com.example.movies.presentation.states.MovieDetailsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,24 +33,24 @@ internal class MovieDetailsViewModel @Inject constructor(
             movieDetailsQueryHandler
                 .handle(request)
                 .collect {
-                when (it) {
-                    is Result.Success -> {
-                        val result = it.data
-                        _uiState.value = MovieDetailsUiState(result)
-                    }
-                    is Result.Error -> {
-                        val errorMessage = when(it.error) {
-                            DataError.Network.NO_INTERNET -> "No internet"
-                            DataError.Network.SERVER_ERROR -> "An Error occurred"
-                            DataError.Network.UNKNOWN -> "An unknown error occurred"
-                            else -> "An unknown error occurred"
+                    when (it) {
+                        is Result.Success -> {
+                            val result = it.data
+                            _uiState.value = MovieDetailsUiState(result)
                         }
-                        _uiState.value = MovieDetailsUiState(null)
-                        onError(errorMessage)
+                        is Result.Error -> {
+                            val errorMessage = when (it.error) {
+                                DataError.Network.NO_INTERNET -> "No internet"
+                                DataError.Network.SERVER_ERROR -> "An Error occurred"
+                                DataError.Network.UNKNOWN -> "An unknown error occurred"
+                                else -> "An unknown error occurred"
+                            }
+                            _uiState.value = MovieDetailsUiState(null)
+                            onError(errorMessage)
+                        }
+                        is Result.Loading -> onLoading()
                     }
-                    is Result.Loading -> onLoading()
                 }
-            }
         }
     }
 }

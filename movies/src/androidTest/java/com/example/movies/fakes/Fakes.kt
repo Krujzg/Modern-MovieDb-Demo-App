@@ -1,7 +1,7 @@
 package com.example.movies.fakes
 
-import com.example.movies.domain.MovieDetails
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieDetails
+import com.example.movies.domain.movieentity.MovieResponse
 import com.example.movies.infrastructure.MovieApi
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -19,7 +19,8 @@ class FakeMovieApi : MovieApi {
     }
 
     override suspend fun getMovie(movieId: Int): retrofit2.Response<MovieDetails> {
-        return retrofit2.Response.success(MovieDetails(
+        return retrofit2.Response.success(
+            MovieDetails(
             id = 8357,
             isAdult = false,
             backDropPath = "indoctum",
@@ -36,6 +37,7 @@ class FakeMovieApi : MovieApi {
             isThereAVideo = false,
             voteAverage = 14.15,
             voteCount = 5712
-        ))
+        )
+        )
     }
 }

@@ -1,7 +1,7 @@
 package com.example.movies
 
 import androidx.compose.ui.test.onNodeWithTag
-import com.example.movies.domain.MovieDetails
+import com.example.movies.domain.movieentity.MovieDetails
 import com.example.movies.presentation.TestTags
 import com.example.movies.presentation.screens.MovieDetailsPage
 import com.example.movies.presentation.states.MovieDetailsUiState

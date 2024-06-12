@@ -33,7 +33,8 @@ import com.example.core.presentation.composables.SnackbarScaffold
 import com.example.core.presentation.theme.AppTheme
 import com.example.core.presentation.theme.LocalAppDimens
 import com.example.movies.R
-import com.example.movies.domain.Movie
+import com.example.movies.domain.Constants
+import com.example.movies.domain.movieentity.Movie
 import com.example.movies.presentation.event.UiEvent
 import com.example.movies.presentation.states.MoviesUiState
 
@@ -124,7 +125,7 @@ private fun MovieCardContent(
 ) {
     val context = LocalContext.current
     val dimens = LocalAppDimens.current
-
+    val halfMaxHeight = Constants.HALF_HEIGHT
     with(movie) {
         Column(
             modifier = modifier.fillMaxSize(),
@@ -138,7 +139,7 @@ private fun MovieCardContent(
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.5f),
+                        .fillMaxHeight(halfMaxHeight),
                     painter = placeholder,
                     contentDescription = null
                 )
@@ -146,7 +147,7 @@ private fun MovieCardContent(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.5f),
+                        .fillMaxHeight(halfMaxHeight),
                     model = ImageRequest.Builder(context)
                         .data(posterUrl)
                         .crossfade(true)

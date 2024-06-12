@@ -1,7 +1,7 @@
 package com.example.movies.infrastructure
 
-import com.example.movies.domain.MovieDetails
-import com.example.movies.domain.MovieResponse
+import com.example.movies.domain.movieentity.MovieDetails
+import com.example.movies.domain.movieentity.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
