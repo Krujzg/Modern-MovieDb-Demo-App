@@ -6,7 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class MovieApplication: Application() {
+class MovieApplication : Application() {
 
     @Inject
     lateinit var debugLogger: IDebugLogger

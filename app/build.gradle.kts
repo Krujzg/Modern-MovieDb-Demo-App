@@ -84,3 +84,12 @@ dependencies {
     implementation(project(":core"))
     implementation("com.squareup:javapoet:1.13.0")
 }
+
+ktlint {
+    debug = true       // set to true to see more details during the run
+    verbose = true     // set to true to enable verbose logging
+    android = true     // set to true if you are using Android
+    outputToConsole = true  // prints the ktlint output to the console
+    ignoreFailures = true  // set to true to ignore failures
+    enableExperimentalRules = true  // set to true to enable experimental rules
+}
