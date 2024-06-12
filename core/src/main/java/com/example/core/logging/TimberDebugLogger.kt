@@ -17,7 +17,7 @@ internal class TimberDebugLogger @Inject constructor(
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
         Timber.plant(object : Timber.DebugTree() {
             override fun createStackElementTag(element: StackTraceElement): String {
-                return "(${element.fileName}:${element.lineNumber})#${element.methodName}"
+                return "(${element.fileName}:${element.lineNumber})#>${element.methodName}"
             }
 
             override fun log(
