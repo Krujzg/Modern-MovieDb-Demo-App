@@ -21,3 +21,5 @@ jobs:
           branch: ${{ github.ref_name }}
           base: master
           draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
