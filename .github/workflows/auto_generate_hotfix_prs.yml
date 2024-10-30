@@ -1,8 +1,7 @@
 name: Autogenerate Hotfix Pull Requests
 
 on:
-  workflow_dispatch:
-  push:
+ create:
     branches:
       - 'hotfix/*'
       - 'release/*'
@@ -13,7 +12,7 @@ permissions:
 
 jobs:
   create-pull-requests:
-    if: github.event.created
+    if: startsWith(github.ref_name, 'hotfix/') || startsWith(github.ref_name, 'release/')
     runs-on: ubuntu-latest
 
     steps:
