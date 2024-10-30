@@ -1,7 +1,6 @@
 name: Autogenerate Hotfix Pull Requests
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - 'hotfix/*'
