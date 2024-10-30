@@ -30,7 +30,7 @@ jobs:
           if [[ "${GITHUB_REF#refs/heads/}" == hotfix/* ]]; then
             echo "label=hotfix" >> $GITHUB_ENV
            # Find all release/* branches and add them to targets
-            release_branches=$(git branch -r | grep 'release/')
+            release_branches=$(git branch -r | grep 'release/' | sed 's|origin/||')
             if [[ -n "$release_branches" ]]; then  # Only loop if release branches are found
               for branch in $release_branches; do
                 targets="$targets $branch"
