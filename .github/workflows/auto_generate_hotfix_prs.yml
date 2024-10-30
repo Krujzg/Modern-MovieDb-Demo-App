@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   create-pull-requests:
+    if: github.event.created
     runs-on: ubuntu-latest
 
     steps:
