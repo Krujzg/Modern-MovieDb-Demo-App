@@ -1,5 +1,4 @@
-name: Hotfix Auto PR
-
+name: Autogenerate Hotfix PRs
 
 on:
   create:
@@ -22,14 +21,22 @@ jobs:
       - name: Set PR Targets
         id: targets
         run: |
-          # Determine the targets based on branch name
+          # Initialize targets variable
+          targets="main dev"
+          
+          # Determine additional targets based on branch name
           if [[ "${GITHUB_REF#refs/heads/}" == hotfix/* ]]; then
-            echo "targets=main dev release/*" >> $GITHUB_ENV
             echo "label=hotfix" >> $GITHUB_ENV
+            # Check for any release/* branches and add them to targets
+            for branch in $(git for-each-ref --format='%(refname:short)' refs/heads/release/*); do
+              targets="$targets $branch"
+            done
           elif [[ "${GITHUB_REF#refs/heads/}" == release/* ]]; then
-            echo "targets=main dev" >> $GITHUB_ENV
             echo "label=hotfix" >> $GITHUB_ENV
           fi
+
+          # Export targets as environment variable
+          echo "targets=$targets" >> $GITHUB_ENV
 
       - name: Create Pull Requests
         run: |
