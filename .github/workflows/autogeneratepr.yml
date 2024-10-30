@@ -51,7 +51,6 @@ jobs:
                          --base ${target} \
                          --head ${{ github.ref_name }} \
                          --label ${{ env.label }} \
-                         --draft
           done
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
