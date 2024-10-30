@@ -17,12 +17,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
-      - name: Authenticate GitHub CLI
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          gh auth login --with-token <<< "${{ secrets.PAT_TOKEN }}"
-
       - name: Create Pull Request to master
         run: |
           gh pr create --title "Hotfix PR: Merge ${{ github.ref_name }} into master" \
