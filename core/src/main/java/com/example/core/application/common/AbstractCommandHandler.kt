@@ -20,7 +20,7 @@ abstract class AbstractCommandHandler<
         TCommandResult : Result<TResponseValue, RootError>> : BaseHandler<TResponseValue>() {
 
     private var result: Result<TResponseValue, RootError>? = defaultResult as? TCommandResult
-
+//asdasd
     suspend fun handle(request: TCommand): Flow<TCommandResult> {
         return flow {
             emit(Result.Loading("Loading..."))
