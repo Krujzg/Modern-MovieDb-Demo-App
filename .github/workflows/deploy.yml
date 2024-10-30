@@ -1,33 +1,33 @@
-name: Build and Deploy App To Firebase Distribution
+#name: Build and Deploy App To Firebase Distribution
 
-on:
-  push:
-    branches: [ master ]
+#on:
+#  push:
+#    branches: [ master ]
 
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17 for Android SDK and build
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-
-      - name: Create local.properties
-        run: |
-          echo "base_url=${{ secrets.BASE_URL }}" >> local.properties
-          echo "api_key=${{ secrets.API_KEY }}" >> local.properties
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-
-      - name: Build and deploy debug
-        run: ./gradlew assembleDebug appDistributionUploadDebug
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+#jobs:
+#  build:
+#
+#   runs-on: ubuntu-latest
+#
+#   steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+#
+#     - name: Set up JDK 17 for Android SDK and build
+#       uses: actions/setup-java@v3
+#v#       with:
+#       java-version: '17'
+#         distribution: 'adopt'
+#
+#     - name: Create local.properties
+#       run: |
+#         echo "base_url=${{ secrets.BASE_URL }}" >> local.properties
+#         echo "api_key=${{ secrets.API_KEY }}" >> local.properties
+#
+#     - name: Grant execute permission for gradlew
+#       run: chmod +x ./gradlew
+#
+#     - name: Build and deploy debug
+#       run: ./gradlew assembleDebug appDistributionUploadDebug
+#       env:
+#         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
