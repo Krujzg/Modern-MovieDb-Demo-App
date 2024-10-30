@@ -2,9 +2,6 @@ name: Autogenerate Hotfix Pull Requests
 
 on:
  create:
-    branches:
-      - 'hotfix/*'
-      - 'release/*'
 
 permissions:
   contents: write
