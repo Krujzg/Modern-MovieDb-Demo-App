@@ -16,10 +16,9 @@ jobs:
       - name: Create pull request to master
         uses: peter-evans/create-pull-request@v7
         with:
+          github_token: ${{ secrets.PAT_TOKEN }}
           title: "Hotfix PR: Merge ${{ github.ref_name }} into master"
           body: "This is an automatically generated pull request for the hotfix branch: ${{ github.ref_name }}."
           branch: ${{ github.ref_name }}
           base: master
           draft: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
