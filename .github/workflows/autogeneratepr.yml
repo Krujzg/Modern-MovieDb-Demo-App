@@ -1,0 +1,25 @@
+name: Hotfix Auto PR
+
+on:
+  create:
+    branches:
+      - 'hotfix/*'
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Create pull request to main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          source: ${{ github.ref_name }}
+          target: main
+          title: "Hotfix PR: Merge ${github.ref_name} into main"
+          body: "This is an automatically generated pull request for the hotfix branch: ${{ github.ref_name }}."
+          branch: "${{ github.ref_name }}"
+          labels: hotfix
+          draft: false
