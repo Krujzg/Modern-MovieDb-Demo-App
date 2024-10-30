@@ -1,7 +1,8 @@
 name: Autogenerate Hotfix Pull Requests
 
 on:
-  create:
+  workflow_dispatch:
+  push:
     branches:
       - 'hotfix/*'
       - 'release/*'
@@ -28,7 +29,7 @@ jobs:
           # Set default PR targets
           targets="main dev"
           
-          # Determine additional targets based on branch name
+          # Determine additional targets based on the branch name
           if [[ "$branch_name" == hotfix/* ]]; then
             echo "label=hotfix" >> $GITHUB_ENV
 
