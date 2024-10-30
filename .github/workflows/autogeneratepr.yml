@@ -17,11 +17,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
-      - name: Check for differences
-        run: |
-          git fetch origin master
-          git log master..${{ github.ref_name }}
-
       - name: Create pull request to master
         uses: peter-evans/create-pull-request@v7
         with:
