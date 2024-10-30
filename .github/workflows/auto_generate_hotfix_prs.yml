@@ -54,7 +54,7 @@ jobs:
                          --body "Automatically generated pull request for branch ${{ github.ref_name }} to ${target}." \
                          --base ${target} \
                          --head ${{ github.ref_name }} \
-                         --label ${{ env.label }} \
+                         --label ${{ env.label }}
           done
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
