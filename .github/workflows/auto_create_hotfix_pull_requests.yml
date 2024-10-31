@@ -39,7 +39,6 @@ jobs:
                 targets="$targets $branch"
               done
             fi
-          fi
           elif [[ "$new_branch_name" == release/* ]]; then
              echo "label=release" >> $GITHUB_ENV
              echo "title_prefix=Release" >> $GITHUB_ENV
