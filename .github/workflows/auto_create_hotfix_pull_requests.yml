@@ -52,4 +52,4 @@ jobs:
                          --label ${{ env.label }}
           done
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN}}
