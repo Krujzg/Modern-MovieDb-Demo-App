@@ -21,7 +21,7 @@ jobs:
       - name: Set Pull Request Targets
         id: targets
         run: |
-          new_branch_name="${GITHUB_REF#refs/heads/}"
+          new_branch_name="${{ github.ref_name }}"
           
           # Set default PR targets
           targets="main dev"
