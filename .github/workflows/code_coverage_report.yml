@@ -1,0 +1,40 @@
+name: Code Coverage
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
+      - name: Build and Test
+        run: ./gradlew clean test jacocoTestReport
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: build/reports/jacoco/test/jacocoTestReport.xml
+
+      - name: Comment Coverage on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: build/reports/jacoco/test/jacocoTestReport.xml
+          header: "### Code Coverage Report"
+          message: |
+            Here is the code coverage for this PR:
+            ```xml
+            {{content}}
+            ```
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
