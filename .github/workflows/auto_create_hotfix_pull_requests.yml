@@ -21,14 +21,16 @@ jobs:
       - name: Set Pull Request Targets
         id: targets
         run: |
-          branch_name="${GITHUB_REF#refs/heads/}"
+          new_branch_name="${GITHUB_REF#refs/heads/}"
           
           # Set default PR targets
           targets="main dev"
           
-          # Determine additional targets
-          if [[ "$branch_name" == hotfix/* ]]; then
-            
+          # Set branch-specific scenarios
+          if [[ "$new_branch_name" == hotfix/* ]]; then
+            echo "label=hotfix" >> $GITHUB_ENV
+            echo "title_prefix=Hotfix" >> $GITHUB_ENV
+
             # Find all release/* branches and add them to targets without origin/ in their names
             release_branches=$(git branch -r | grep 'release/' | sed 's|origin/||')
 
@@ -38,17 +40,21 @@ jobs:
               done
             fi
           fi
+          elif [[ "$new_branch_name" == release/* ]]; then
+             echo "label=release" >> $GITHUB_ENV
+             echo "title_prefix=Release" >> $GITHUB_ENV
+          fi
           
           echo "targets=$targets" >> $GITHUB_ENV
 
       - name: Create Hotfix Pull Requests
         run: |
           for target in ${{ env.targets }}; do
-            gh pr create --title "Hotfix: Merge ${{ github.ref_name }} into ${target}" \
+            gh pr create --title "${{ env.title_prefix }}: Merge ${{ github.ref_name }} into ${target}" \
                          --body "Automatically generated pull request for branch ${{ github.ref_name }} to ${target}." \
                          --base ${target} \
                          --head ${{ github.ref_name }} \
-                         --label hotfix
+                         --label ${{ env.label }}
           done
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN}}
