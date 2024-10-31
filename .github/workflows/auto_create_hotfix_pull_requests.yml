@@ -1,0 +1,55 @@
+name: Auto Create Hotfix Pull Requests
+
+on:
+ create:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto_create_hotfix_pull_requests:
+    if: startsWith(github.ref_name, 'hotfix/') || startsWith(github.ref_name, 'release/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ensure all branches are fetched
+
+      - name: Set Pull Request Targets
+        id: targets
+        run: |
+          branch_name="${GITHUB_REF#refs/heads/}"
+          
+          # Set default PR targets
+          targets="main dev"
+          
+          # Determine additional targets
+          if [[ "$branch_name" == hotfix/* ]]; then
+            
+            # Find all release/* branches and add them to targets without origin/ in their names
+            release_branches=$(git branch -r | grep 'release/' | sed 's|origin/||')
+
+            if [[ -n "$release_branches" ]]; then # Only loop if release branches are found
+              for branch in $release_branches; do
+                targets="$targets $branch"
+              done
+            fi
+          fi
+          
+          echo "label=hotfix" >> $GITHUB_ENV
+          echo "targets=$targets" >> $GITHUB_ENV
+
+      - name: Create Hotfix Pull Requests
+        run: |
+          for target in ${{ env.targets }}; do
+            gh pr create --title "Hotfix: Merge ${{ github.ref_name }} into ${target}" \
+                         --body "Automatically generated pull request for branch ${{ github.ref_name }} to ${target}." \
+                         --base ${target} \
+                         --head ${{ github.ref_name }} \
+                         --label ${{ env.label }}
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
